@@ -1,1 +1,2 @@
-# hms-push-serverdemo-python
+# CP_HMSPlatform_WiseCloudPushService_ServerPythonSDK
+

@@ -1,0 +1,10 @@
+target/
+.settings/
+logs/
+log/
+*.pyc
+*.jar
+*/*.jar
+.idea
+*.iml
+.project
