@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import urllib
+import urllib.parse
 import json
 import time
 from src.push_admin import _http
@@ -66,7 +66,7 @@ class App(object):
         params['client_secret'] = self.app_secret
         params['client_id'] = self.app_id
 
-        msg_body = urllib.urlencode(params)
+        msg_body = urllib.parse.urlencode(params)
 
         try:
             response = _http.post(self.token_server, msg_body, headers)
@@ -78,7 +78,7 @@ class App(object):
             response_body = json.loads(response.text)
 
             self.access_token = response_body.get('access_token')
-            self.token_expired_time = long(round(time.time() * 1000)) + (long(response_body.get('expires_in')) - 5 * 60) * 1000
+            self.token_expired_time = int(round(time.time() * 1000)) + (int(response_body.get('expires_in')) - 5 * 60) * 1000
 
             return True, None
         except Exception as e:
@@ -89,7 +89,7 @@ class App(object):
         if self.access_token is None:
             """ need refresh token """
             return True
-        return long(round(time.time() * 1000)) >= self.token_expired_time
+        return int(round(time.time() * 1000)) >= self.token_expired_time
 
     def _update_token(self):
         if self._is_token_expired() is True:
