@@ -14,9 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import urllib
+from urllib.parse import urlencode, quote_plus
 import json
 import time
+
+from numpy.core import long
+
 from src.push_admin import _http
 from src.push_admin import _message_serializer
 
@@ -32,7 +35,7 @@ class App(object):
             msg_body = json.dumps(body)
             response = _http.post(url, msg_body, headers)
 
-            if response.status_code is not 200:
+            if response.status_code != 200:
                 raise ApiCallError('http status code is {0} in send.'.format(response.status_code))
 
             # json text to dict
@@ -56,29 +59,30 @@ class App(object):
         self.hw_push_topic_unsub_server = self.push_open_url + "/v1/{0}/topic:unsubscribe"
         self.hw_push_topic_query_server = self.push_open_url + "/v1/{0}/topic:list"
 
+    @property
     def _refresh_token(self):
         """refresh access token"""
-        headers = dict()
-        headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
+        headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
+        params = {
+            'grant_type': 'client_credentials',
+            'client_secret': self.app_secret,
+            'client_id': self.app_id,
+        }
 
-        params = dict()
-        params['grant_type'] = 'client_credentials'
-        params['client_secret'] = self.app_secret
-        params['client_id'] = self.app_id
-
-        msg_body = urllib.urlencode(params)
+        msg_body = urlencode(params, quote_via=quote_plus)
 
         try:
             response = _http.post(self.token_server, msg_body, headers)
 
-            if response.status_code is not 200:
+            if response.status_code != 200:
                 return False, 'http status code is {0} in get access token'.format(response.status_code)
 
             """ json string to directory """
             response_body = json.loads(response.text)
 
             self.access_token = response_body.get('access_token')
-            self.token_expired_time = long(round(time.time() * 1000)) + (long(response_body.get('expires_in')) - 5 * 60) * 1000
+            self.token_expired_time = long(round(time.time() * 1000)) + (
+                    long(response_body.get('expires_in')) - 5 * 60) * 1000
 
             return True, None
         except Exception as e:
@@ -93,15 +97,15 @@ class App(object):
 
     def _update_token(self):
         if self._is_token_expired() is True:
-            result, reason = self._refresh_token()
+            result, reason = self._refresh_token
             if result is False:
                 raise ApiCallError(reason)
 
     def _create_header(self):
-        headers = dict()
-        headers['Content-Type'] = 'application/json;charset=utf-8'
-        headers['Authorization'] = 'Bearer {0}'.format(self.access_token)
-        return headers
+        return {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Authorization': 'Bearer {0}'.format(self.access_token),
+        }
 
     def send(self, message, validate_only):
         """
@@ -116,9 +120,10 @@ class App(object):
         self._update_token()
         headers = self._create_header()
         url = self.hw_push_server.format(self.app_id)
-        msg_body_dict = dict()
-        msg_body_dict['validate_only'] = validate_only
-        msg_body_dict['message'] = App.JSON_ENCODER.default(message)
+        msg_body_dict = {
+            'validate_only': validate_only,
+            'message': App.JSON_ENCODER.default(message),
+        }
 
         return App._send_to_server(headers, msg_body_dict, url)
 
@@ -166,6 +171,7 @@ class ApiCallError(Exception):
         message: A error message string.
         detail: Original low-level exception.
     """
+
     def __init__(self, message, detail=None):
         Exception.__init__(self, message)
         self.detail = detail

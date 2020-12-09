@@ -18,7 +18,6 @@ from src import push_admin
 import json
 from src.push_admin import messaging
 
-
 """
 [ANDROID] android
 """
@@ -32,7 +31,7 @@ android = messaging.AndroidConfig(
 
 def send_push_android_data_message():
     """
-    a sample to show hwo to send web push message
+    a sample to show how to send web push message
     :return:
     """
     message = messaging.Message(
@@ -43,10 +42,10 @@ def send_push_android_data_message():
 
     try:
         response = messaging.send_message(message)
-        print "response is ", json.dumps(vars(response))
+        print("response is ", json.dumps(vars(response)))
         assert (response.code == '80000000')
     except Exception as e:
-        print repr(e)
+        print(repr(e))
 
 
 def init_app():
@@ -63,4 +62,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -18,7 +18,6 @@ from src import push_admin
 import json
 from src.push_admin import messaging
 
-
 notification = messaging.Notification(
     title='sample title',
     body='sample message body',
@@ -49,14 +48,13 @@ android_notification = messaging.AndroidNotification(
     group='Group1',
     importance=messaging.AndroidNotification.PRIORITY_HIGH,
     light_settings=messaging.AndroidLightSettings(color=messaging.AndroidLightSettingsColor(
-                                                              alpha=0, red=0, green=1, blue=1)
-                                                  , light_on_duration="3.5", light_off_duration="5S"),
+        alpha=0, red=0, green=1, blue=1)
+        , light_on_duration="3.5", light_off_duration="5S"),
     badge=messaging.AndroidBadgeNotification(
         add_num=1, clazz='Classic'),
     visibility=messaging.AndroidNotification.PUBLIC,
     foreground_show=True
 )
-
 
 android = messaging.AndroidConfig(
     collapse_key=-1,
@@ -69,7 +67,7 @@ android = messaging.AndroidConfig(
 
 def send_push_android_notify_message():
     """
-    a sample to show hwo to send web push message
+    a sample to show how to send web push message
     :return:
     """
     message = messaging.Message(
@@ -80,10 +78,10 @@ def send_push_android_notify_message():
 
     try:
         response = messaging.send_message(message)
-        print "response is ", json.dumps(vars(response))
+        print("response is ", json.dumps(vars(response)))
         assert (response.code == '80000000')
     except Exception as e:
-        print repr(e)
+        print(repr(e))
 
 
 def init_app():

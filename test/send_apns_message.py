@@ -16,8 +16,7 @@
 
 from src import push_admin
 import json
-from src.push_admin  import messaging
-
+from src.push_admin import messaging
 
 headers = {messaging.APNsHeader.HEAD_APNs_ID: "6532dc0e-f581-7bfb-e1ab-60ec3cecea73"}
 
@@ -46,7 +45,7 @@ apns_push_config = messaging.APNsConfig(headers=headers,
 
 def send_apns_push_message():
     """
-    a sample to show hwo to send web push message
+    a sample to show how to send web push message
     :return:
     """
     message = messaging.Message(
@@ -56,11 +55,10 @@ def send_apns_push_message():
 
     try:
         response = messaging.send_message(message)
-        print "response is ", json.dumps(vars(response))
+        print("response is ", json.dumps(vars(response)))
         assert (response.code == '80000000')
     except Exception as e:
-        print repr(e)
-
+        print(repr(e))
 
 
 def init_app():

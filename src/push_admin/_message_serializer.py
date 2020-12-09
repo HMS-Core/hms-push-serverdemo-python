@@ -36,6 +36,7 @@ class MessageSerializer(json.JSONEncoder):
     _messages.AndroidClickAction
     _messages.BadgeNotification
     """
+
     def default(self, message):
         """
         :param message: The push message

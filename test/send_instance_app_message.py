@@ -30,7 +30,7 @@ android = messaging.AndroidConfig(
 
 def send_push_android_data_message():
     """
-    a sample to show hwo to send web push message
+    a sample to show how to send web push message
     :return:
     """
     message = messaging.Message(
@@ -39,19 +39,19 @@ def send_push_android_data_message():
         #       + "of the best push platform on the planet!!!\",\"page\":\"/\",\"params\":{\"key1\":\"test1\",\"key2\":\"test2\"},\"ringtone\":"
         #       + "{\"vibration\":\"true\",\"breathLight\":\"true\"}}}",
         # Chinese sample
-        data = "{\"pushtype\":0,\"pushbody\":{\"title\":\"欢迎使用华为HMS Push Kit！\",\"description\":\"世界上最好，"
-              + "最优秀的推送平台！！！\",\"page\":\"/\",\"params\":{\"key1\":\"test1\",\"key2\":\"test2\"},\"ringtone\":"
-              + "{\"vibration\":\"true\",\"breathLight\":\"true\"}}}",
+        data="{\"pushtype\":0,\"pushbody\":{\"title\":\"欢迎使用华为HMS Push Kit！\",\"description\":\"世界上最好，"
+             + "最优秀的推送平台！！！\",\"page\":\"/\",\"params\":{\"key1\":\"test1\",\"key2\":\"test2\"},\"ringtone\":"
+             + "{\"vibration\":\"true\",\"breathLight\":\"true\"}}}",
         android=android,
         token=['your token']
     )
 
     try:
         response = messaging.send_message(message)
-        print "response is ", json.dumps(vars(response))
+        print("response is ", json.dumps(vars(response)))
         assert (response.code == '80000000')
     except Exception as e:
-        print repr(e)
+        print(repr(e))
 
 
 def init_app():

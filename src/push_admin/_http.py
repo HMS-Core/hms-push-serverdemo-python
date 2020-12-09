@@ -27,9 +27,10 @@ def post(url, req_body, headers=None):
             fali return None
     """
     try:
-        response = requests.post(url, data=req_body, headers=headers, timeout=10, verify=False)
-        return response
-
+        # RQ100: Setting verify=False when using requests bypasses SSL verification and leaves requests susceptible to MITM attacks. Found in 'requests.post( url, data=req_body, headers=headers, timeout=10, verify=False )'.
+        return requests.post(
+            url, data=req_body, headers=headers, timeout=10, verify=False
+        )
     except Exception as e:
         raise ValueError('caught exception when post {0}. {1}'.format(url, e))
 
@@ -48,5 +49,3 @@ def _format_http_text(method, url, headers, body):
 
     result = result + body
     return result
-
-

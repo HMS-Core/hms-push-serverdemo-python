@@ -34,5 +34,3 @@ app_id = 'your aappId'
 app_secret = 'your appSecret'
 token_server = 'https://oauth-login.cloud.huawei.com/oauth2/v2/token'
 push_open_api = 'https://push-api.cloud.huawei.com'
-
-

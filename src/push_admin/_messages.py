@@ -32,6 +32,7 @@ class Message(object):
         topic: message topic, must be string (optional).
         condition: message condition, must be string (optional).
     """
+
     def __init__(self, data=None, notification=None, android=None, apns=None, web_push=None, token=None,
                  topic=None, condition=None):
         MessageValidator.check_message(data, notification, android, apns, web_push, token, topic, condition)
@@ -52,6 +53,7 @@ class Notification(object):
         title: Title of the notification (optional).
         body: Body of the notification (optional).
     """
+
     def __init__(self, title=None, body=None, image=None):
         MessageValidator.check_notification(title, body, image)
         self.title = title
@@ -68,6 +70,7 @@ class APNsConfig(object):
     https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/\
     CommunicatingwithAPNs.html
     """
+
     def __init__(self, headers=None, payload=None, apns_hms_options=None):
         MessageValidator.check_apns_config(headers=headers, payload=payload, apns_hms_options=apns_hms_options)
         self.headers = headers
@@ -96,6 +99,7 @@ class APNsPayload(object):
     """
      APNs payload definition
     """
+
     def __init__(self, aps, **kwargs):
         MessageValidator.check_apns_payload(aps=aps)
         self.aps = aps
@@ -126,6 +130,7 @@ class APNsAps(object):
         "acme2" : [ "bang",  "whiz" ]
     }
     """
+
     def __init__(self, alert=None, badge=None, sound=None, content_available=None, category=None,
                  thread_id=None, mutable_content=None, custom_data=None):
         MessageValidator.check_apns_payload_aps(alert=alert, badge=badge, sound=sound,
@@ -173,6 +178,7 @@ class APNsHMSOptions(object):
     Args:
         target_user_type: Developer or Commercial enviroment
     """
+
     def __init__(self, target_user_type=None):
         MessageValidator.check_apns_hms_options(target_user_type=target_user_type)
         self.target_user_type = target_user_type
@@ -213,6 +219,7 @@ class WebPushHeader(object):
     """
      Web Push Header, refer to: https://tools.ietf.org/html/rfc7240
     """
+
     def __init__(self, ttl=None, urgency=None, topic=None):
         MessageValidator.check_webpush_header(ttl, urgency, topic)
         self.ttl = ttl
@@ -224,6 +231,7 @@ class WebPushNotification(object):
     """
      Web Push Notification
     """
+
     def __init__(self, title=None, body=None, icon=None, actions=None, badge=None, data=None, dir=None,
                  image=None, lang=None, renotify=None, require_interaction=None, silent=None, tag=None,
                  timestamp=None, vibrate=None):
@@ -253,6 +261,7 @@ class WebPushNotificationAction(object):
     """
     The action for web push notification
     """
+
     def __init__(self, action=None, title=None, icon=None):
         """
 
@@ -270,6 +279,7 @@ class WebPushHMSOptions(object):
     """
     optional link option
     """
+
     def __init__(self, link=None):
         MessageValidator.check_webpush_hms_options(link)
         self.link = link
@@ -279,13 +289,13 @@ class WebPushHMSOptions(object):
 
 
 class AndroidConfig(object):
-
     HIGH_PRIORITY = "HIGH"
     NORMAL_PRIORITY = "NORMAL"
 
     """
     Android-specific options that can be included in a message.
     """
+
     def __init__(self, collapse_key=None, urgency='NORMAL', ttl=None, bi_tag=None
                  , fast_app_target=None, notification=None, data=None, category=None):
         MessageValidator.check_android_config(collapse_key, urgency, ttl, bi_tag, fast_app_target
@@ -301,11 +311,9 @@ class AndroidConfig(object):
 
 
 class AndroidNotification(object):
-
     PRIORITY_LOW = "LOW"
     PRIORITY_DEFAULT = "NORMAL"
     PRIORITY_HIGH = "HIGH"
-
 
     VISIBILITY_UNSPECIFIED = "VISIBILITY_UNSPECIFIED"
     PRIVATE = "PRIVATE"
@@ -321,8 +329,8 @@ class AndroidNotification(object):
                  title_loc_args=None, multi_lang_key=None, channel_id=None, notify_summary=None, image=None,
                  style=None, big_title=None, big_body=None, auto_clear=None, notify_id=None, group=None, badge=None,
                  ticker=None, auto_cancel=None, when=None, importance=None, use_default_vibrate=True,
-                 use_default_light=True, vibrate_config=None, visibility=None, light_settings=None, foreground_show=False):
-
+                 use_default_light=True, vibrate_config=None, visibility=None, light_settings=None,
+                 foreground_show=False):
         MessageValidator.check_android(title=title, body=body, icon=icon, color=color, sound=sound,
                                        default_sound=default_sound, tag=tag, click_action=click_action,
                                        body_loc_key=body_loc_key, body_loc_args=body_loc_args,
@@ -382,6 +390,7 @@ class AndroidClickAction(object):
         action: action definition for push message
         rich_resource: rich_resource of the android.notification (optional).
     """
+
     def __init__(self, action_type=None, intent=None, action=None, url=None, rich_resource=None):
         MessageValidator.check_click_action(action_type=action_type, intent=intent, action=action, url=url,
                                             rich_resource=rich_resource)
@@ -400,6 +409,7 @@ class AndroidBadgeNotification(object):
         set_num: set the specific number of badge notification (optional).
         clazz: message class of badge notification in the android.notification (optional).
     """
+
     def __init__(self, add_num=None, set_num=None, clazz=None):
         MessageValidator.check_badge_notification(add_num=add_num, set_num=set_num, clazz=clazz)
         self.add_num = add_num
@@ -420,8 +430,10 @@ class AndroidLightSettings(object):
             "light_off_duration":"5S"
         }
     """
+
     def __init__(self, color=None, light_on_duration=None, light_off_duration=None):
-        MessageValidator.check_light_settings(color=color, light_on_duration=light_on_duration, light_off_duration=light_off_duration)
+        MessageValidator.check_light_settings(color=color, light_on_duration=light_on_duration,
+                                              light_off_duration=light_off_duration)
         self.color = color
         self.light_on_duration = light_on_duration
         self.light_off_duration = light_off_duration
@@ -436,12 +448,14 @@ class AndroidLightSettingsColor(object):
                 "blue":1
             }
     """
+
     def __init__(self, alpha=None, red=None, green=None, blue=None):
         MessageValidator.check_light_settings_color(alpha=alpha, red=red, green=green, blue=blue)
         self.alpha = alpha
         self.red = red
         self.green = green
         self.blue = blue
+
 
 # --------------------------------------------------------------------------------------------------------------------
 
@@ -451,6 +465,7 @@ class MessageValidator(object):
         message validation utilities.
         Methods provided in this class raise ValueErrors if any validations fail.
     """
+
     @classmethod
     def check_https_url(cls, hint, value):
         cls.check_string(hint, value)
@@ -483,7 +498,7 @@ class MessageValidator(object):
         if value is None:
             return None
         if not isinstance(value, six.string_types):
-                raise ValueError('{0} must be a string.'.format(hint))
+            raise ValueError('{0} must be a string.'.format(hint))
         for v in args:
             if value.__eq__(v):
                 return value
@@ -513,19 +528,12 @@ class MessageValidator(object):
 
     @classmethod
     def count_boolean(cls, *args):
-        count = 0
-        for v in args:
-            if v:
-                count += 1
-        return count
+        return sum(1 for v in args if v)
 
     @classmethod
     def check_not_all_none(cls, hint, *args):
         total_size = len(args)
-        count = 0
-        for data in args:
-            if data is None:
-                count += 1
+        count = sum(1 for data in args if data is None)
         if total_size == count:
             raise ValueError(hint)
 
@@ -681,7 +689,8 @@ class MessageValidator(object):
         cls.check_string(hint="AndroidConfig.data", value=data)
 
     @classmethod
-    def check_android(cls, title, body, icon, color, sound, default_sound, tag, click_action, body_loc_key, body_loc_args,
+    def check_android(cls, title, body, icon, color, sound, default_sound, tag, click_action, body_loc_key,
+                      body_loc_args,
                       title_loc_key, title_loc_args, multi_lang_key, channel_id, notify_summary, image,
                       style, big_title, big_body, auto_clear, notify_id, group, badge,
                       ticker, auto_cancel, when, importance,
@@ -707,17 +716,18 @@ class MessageValidator(object):
         # body_loc_key
         cls.check_string(hint="AndroidNotification.body_loc_key", value=body_loc_key)
         # body_loc_args
-        if (body_loc_args is not None) and (not isinstance(body_loc_args, tuple)) and (not isinstance(body_loc_args, list)):
+        if (body_loc_args is not None) and (not isinstance(body_loc_args, tuple)) and (
+                not isinstance(body_loc_args, list)):
             raise ValueError('AndroidNotification.body_loc_args must be an instance of tuple or list')
         # title_loc_key
         cls.check_string(hint="AndroidNotification.title_loc_key", value=title_loc_key)
         # title_loc_args
-        if (title_loc_args is not None) and (not isinstance(title_loc_args, tuple) and not isinstance(title_loc_args, list)):
+        if (title_loc_args is not None) and (
+                not isinstance(title_loc_args, tuple) and not isinstance(title_loc_args, list)):
             raise ValueError('AndroidNotification.title_loc_args must be an instance of tuple or list')
         # multi_lang_key
-        if multi_lang_key is not None:
-            if not isinstance(multi_lang_key, dict):
-                raise ValueError('AndroidNotification.multi_lang_key must be a dict.')
+        if multi_lang_key is not None and not isinstance(multi_lang_key, dict):
+            raise ValueError('AndroidNotification.multi_lang_key must be a dict.')
         # channel_id
         cls.check_string(hint="AndroidNotification.channel_id", value=channel_id)
         # notify_summary
@@ -735,12 +745,7 @@ class MessageValidator(object):
                     raise ValueError('AndroidNotification.big_title must be valid string when style is 1')
                 if (big_body is None) and (not isinstance(big_body, str)):
                     raise ValueError('AndroidNotification.big_body must be valid string when style is 1')
-            # # big_picture
-            # if style == 2:
-            #     if (big_picture is None) or (not isinstance(big_picture, str)):
-            #         raise ValueError('AndroidNotification.big_picture must be valid string when style is 2')
-            #     if not big_picture.upper().startswith('HTTPS'):
-            #         raise ValueError('AndroidNotification.big_picture must be valid https url address when type is 2')
+
         # auto_clear
         cls.check_number(label='AndroidNotification.auto_clear ', value=auto_clear)
         # notify_id
@@ -771,7 +776,8 @@ class MessageValidator(object):
                                  AndroidNotification.PUBLIC, AndroidNotification.SECRET,
                                  AndroidNotification.VISIBILITY_UNSPECIFIED)
         # light_settings
-        cls.check_type(light_settings, AndroidLightSettings, "light_settings should be an instance of AndroidLightSettings")
+        cls.check_type(light_settings, AndroidLightSettings,
+                       "light_settings should be an instance of AndroidLightSettings")
         # foreground_show
         cls.check_boolean(hint="AndroidNotification.foreground_show", value=foreground_show)
 
@@ -794,7 +800,8 @@ class MessageValidator(object):
         if action_type == 1:
             count = cls.count_boolean(isinstance(intent, str), isinstance(action, str))
             if count <= 0:
-                raise ValueError('ClickAction.intent or ClickAction.action must be present or both when click_type is 1')
+                raise ValueError(
+                    'ClickAction.intent or ClickAction.action must be present or both when click_type is 1')
 
         # url, if type is 2, url must
         if action_type == 2:
@@ -876,15 +883,13 @@ class MessageValidator(object):
     @classmethod
     def check_apns_payload(cls, aps=None):
         cls.check_type(aps, APNsAps, "aps must be an instance of APNsAps")
-        pass
 
     @classmethod
     def check_apns_payload_aps(cls, alert, badge, sound, content_available, category, thread_id, mutable_content,
                                custom_data):
         # alert: Dictionary or String
-        if alert is not None:
-            if not isinstance(alert, six.string_types):
-                cls.check_type(alert, APNsAlert, "alert must be an instance of String or APNsAlert class")
+        if alert is not None and not isinstance(alert, six.string_types):
+            cls.check_type(alert, APNsAlert, "alert must be an instance of String or APNsAlert class")
         # badge: Number
         cls.check_number("APNsAps.badge", badge)
         # sound: String
@@ -898,9 +903,8 @@ class MessageValidator(object):
         # mutable_content
         cls.check_boolean("APNsAps.mutable_content", mutable_content)
         # custom_data
-        if custom_data is not None:
-            if not isinstance(custom_data, dict):
-                raise ValueError('APNsAps.custom_data must be a dict.')
+        if custom_data is not None and not isinstance(custom_data, dict):
+            raise ValueError('APNsAps.custom_data must be a dict.')
 
     @classmethod
     def check_apns_payload_aps_alert(cls, title, body, loc_key, loc_args, title_loc_key, title_loc_args, action_loc_key,
@@ -922,9 +926,8 @@ class MessageValidator(object):
         # launch_image: String
         cls.check_string("APNsAlert.launch_image", launch_image)
         # custom_data
-        if custom_data is not None:
-            if not isinstance(custom_data, dict):
-                raise ValueError('APNsAlert.custom_data must be a dict.')
+        if custom_data is not None and not isinstance(custom_data, dict):
+            raise ValueError('APNsAlert.custom_data must be a dict.')
 
     @classmethod
     def check_apns_hms_options(cls, target_user_type):

@@ -110,6 +110,7 @@ class SendResponse(object):
         The response received from an send request to the HCM API.
         response: received http response body text from HCM.
     """
+
     def __init__(self, response=None):
         try:
             self._code = response['code']
@@ -142,6 +143,7 @@ class BaseTopicResponse(object):
        "requestId": "157466304904000004000701"
      }
     """
+
     def __init__(self, json_rsp=None):
         if json_rsp is None:
             self._msg = ""
@@ -176,6 +178,7 @@ class TopicSubscribeResponse(BaseTopicResponse):
        "errors": []
      }
     """
+
     def __init__(self, json_rsp=None):
         super(TopicSubscribeResponse, self).__init__(json_rsp=json_rsp)
         if json_rsp is None:
@@ -212,6 +215,7 @@ class TopicQueryResponse(BaseTopicResponse):
                          } ]
          }
     """
+
     def __init__(self, json_rsp=None):
         super(TopicQueryResponse, self).__init__(json_rsp)
         self._topics = json_rsp['topics']
