@@ -8,6 +8,7 @@
  * [Configuration ](#configuration )
  * [Supported Environments](#supported-environments)
  * [Sample Code](#sample-code)
+ * [Libraries](#Libraries)
  * [License](#license)
  
  
@@ -30,7 +31,7 @@ python setup.py install
 ```
 
 ## Supported Environments
-For pushkit-python-sample, We currently support Python 2.7 and JetBrains PyCharm are recommended.
+For pushkit-python-sample, We currently support Python 2.7/3.7 and JetBrains PyCharm are recommended.
 
 
 ## Configuration 
@@ -86,6 +87,11 @@ Code location: examples/send_apns_message.py
 8) Send a test message.
 Code location: examples/send_test_message.py
 
+## Libraries
+| Library             |     Site
+| -----------------   |     --------------------------------------------------- |
+| requests            |     https://requests.readthedocs.io/en/master/ |
+| six                 |     https://six.readthedocs.io/   |
 ## License
 
 pushkit Python sample is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).

@@ -24,20 +24,21 @@ _apps_lock = threading.RLock()
 _DEFAULT_APP_NAME = 'DEFAULT'
 
 
-def initialize_app(appid, appsecret, token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
+def initialize_app(appid_at, appsecret_at, appid_push=None, token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
                    push_open_url='https://push-api.cloud.huawei.com'):
     """
         Initializes and returns a new App instance.
-        :param appid: appid parameters obtained by developer alliance applying for Push service
-        :param appsecret: appsecret parameters obtained by developer alliance applying for Push service
+        :param appid_at: appid parameters obtained by developer alliance applying for Push service
+        :param appsecret_at: appsecret parameters obtained by developer alliance applying for Push service
+        :param appid_push: the application Id in the URL
         :param token_server: Oauth server URL
         :param push_open_url: push open API URL
     """
-    app = _app.App(appid, appsecret, token_server=token_server, push_open_url=push_open_url)
+    app = _app.App(appid_at, appsecret_at, appid_push, token_server=token_server, push_open_url=push_open_url)
 
     with _apps_lock:
-        if appid not in _apps:
-            _apps[appid] = app
+        if appid_at not in _apps:
+            _apps[appid_at] = app
 
         """set default app instance"""
         if _apps.get(_DEFAULT_APP_NAME) is None:

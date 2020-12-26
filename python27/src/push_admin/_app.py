@@ -27,10 +27,10 @@ class App(object):
     JSON_ENCODER = _message_serializer.MessageSerializer()
 
     @classmethod
-    def _send_to_server(cls, headers, body, url):
+    def _send_to_server(cls, headers, body, url, verify_peer=False):
         try:
             msg_body = json.dumps(body)
-            response = _http.post(url, msg_body, headers)
+            response = _http.post(url, msg_body, headers, verify_peer)
 
             if response.status_code is not 200:
                 raise ApiCallError('http status code is {0} in send.'.format(response.status_code))
@@ -42,11 +42,15 @@ class App(object):
         except Exception as e:
             raise ApiCallError('caught exception when send. {0}'.format(e))
 
-    def __init__(self, app_id, app_secret, token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
+    def __init__(self, appid_at, app_secret, appid_push, token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
                  push_open_url='https://push-api.cloud.huawei.com'):
         """class init"""
-        self.app_id = app_id
-        self.app_secret = app_secret
+        self.appid_at = appid_at
+        self.app_secret_at = app_secret
+        if appid_push is None:
+            self.appid_push = appid_at
+        else:
+            self.appid_push = appid_push
         self.token_expired_time = 0
         self.access_token = None
         self.token_server = token_server
@@ -56,20 +60,24 @@ class App(object):
         self.hw_push_topic_unsub_server = self.push_open_url + "/v1/{0}/topic:unsubscribe"
         self.hw_push_topic_query_server = self.push_open_url + "/v1/{0}/topic:list"
 
-    def _refresh_token(self):
-        """refresh access token"""
+    def _refresh_token(self, verify_peer=False):
+        """refresh access token
+        :param verify_peer: (optional) Either a boolean, in which case it controls whether we verify
+            the server's TLS certificate, or a string, in which case it must be a path
+            to a CA bundle to use. Defaults to ``True``.
+        """
         headers = dict()
         headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
 
         params = dict()
         params['grant_type'] = 'client_credentials'
-        params['client_secret'] = self.app_secret
-        params['client_id'] = self.app_id
+        params['client_secret'] = self.app_secret_at
+        params['client_id'] = self.appid_at
 
         msg_body = urllib.urlencode(params)
 
         try:
-            response = _http.post(self.token_server, msg_body, headers)
+            response = _http.post(self.token_server, msg_body, headers, verify_peer=verify_peer)
 
             if response.status_code is not 200:
                 return False, 'http status code is {0} in get access token'.format(response.status_code)
@@ -91,9 +99,9 @@ class App(object):
             return True
         return long(round(time.time() * 1000)) >= self.token_expired_time
 
-    def _update_token(self):
+    def _update_token(self, verify_peer=False):
         if self._is_token_expired() is True:
-            result, reason = self._refresh_token()
+            result, reason = self._refresh_token(verify_peer)
             if result is False:
                 raise ApiCallError(reason)
 
@@ -103,24 +111,27 @@ class App(object):
         headers['Authorization'] = 'Bearer {0}'.format(self.access_token)
         return headers
 
-    def send(self, message, validate_only):
+    def send(self, message, validate_only, **kwargs):
         """
             Sends the given message Huawei Cloud Messaging (HCM)
             :param message:
             :param validate_only:
+            :param kwargs:
+                   verify_peer: HTTPS server identity verification, use library 'certifi'
             :return:
                 response dict: response body dict
             :raise:
                 ApiCallError: failure reason
         """
-        self._update_token()
+        verify_peer = kwargs['verify_peer']
+        self._update_token(verify_peer)
         headers = self._create_header()
-        url = self.hw_push_server.format(self.app_id)
+        url = self.hw_push_server.format(self.appid_push)
         msg_body_dict = dict()
         msg_body_dict['validate_only'] = validate_only
         msg_body_dict['message'] = App.JSON_ENCODER.default(message)
 
-        return App._send_to_server(headers, msg_body_dict, url)
+        return App._send_to_server(headers, msg_body_dict, url, verify_peer)
 
     def subscribe_topic(self, topic, token_list):
         """
@@ -130,7 +141,7 @@ class App(object):
         """
         self._update_token()
         headers = self._create_header()
-        url = self.hw_push_topic_sub_server.format(self.app_id)
+        url = self.hw_push_topic_sub_server.format(self.appid_push)
         msg_body_dict = {'topic': topic, 'tokenArray': token_list}
         return App._send_to_server(headers, msg_body_dict, url)
 
@@ -143,7 +154,7 @@ class App(object):
         """
         self._update_token()
         headers = self._create_header()
-        url = self.hw_push_topic_unsub_server.format(self.app_id)
+        url = self.hw_push_topic_unsub_server.format(self.appid_push)
         msg_body_dict = {'topic': topic, 'tokenArray': token_list}
         return App._send_to_server(headers, msg_body_dict, url)
 
@@ -154,7 +165,7 @@ class App(object):
         """
         self._update_token()
         headers = self._create_header()
-        url = self.hw_push_topic_query_server.format(self.app_id)
+        url = self.hw_push_topic_query_server.format(self.appid_push)
         msg_body_dict = {'token': token}
         return App._send_to_server(headers, msg_body_dict, url)
 

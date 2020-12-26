@@ -31,8 +31,8 @@ android_notification = messaging.AndroidNotification(
     default_sound=True,
     tag='tagBoom',
     click_action=messaging.AndroidClickAction(
-        action_type=2,
-        url="https://www.huawei.com"),
+        action_type=1,
+        intent="intent://com.huawei.codelabpush/deeplink?#Intent;scheme=pushscheme;launchFlags=0x4000000;i.age=180;S.name=abc;end"),
     body_loc_key='M.String.body',
     body_loc_args=('boy', 'dog'),
     title_loc_key='M.String.title',
@@ -75,22 +75,29 @@ def send_push_android_data_message():
     message = messaging.Message(
         notification=notification,
         android=android,
-        topic='topic1'
+        # TODO
+        topic='Your topic'
     )
 
     try:
+        # Case 1: Local CA sample code
+        # response = messaging.send_message(message, verify_peer="../Push-CA-Root.pem")
+        # Case 2: No verification of HTTPS's certificate
         response = messaging.send_message(message)
+        # Case 3: use certifi Library
+        # import certifi
+        # response = messaging.send_message(message, verify_peer=certifi.where())
         print "response is ", json.dumps(vars(response))
         assert (response.code == '80000000')
     except Exception as e:
         print repr(e)
 
 
-
 def init_app():
     """init sdk app"""
-    app_id = 'your appId'
-    app_secret = 'your appSecret'
+    # TODO
+    app_id = "Your android application's app id"
+    app_secret = "Your android application's app secret"
     initialize_app(app_id, app_secret)
 
 

@@ -49,22 +49,34 @@ def send_push_android_data_message():
     """
     message = messaging.Message(
         web_push=web_push_config,
+        # TODO
         token=['your token']
     )
 
     try:
+        # Case 1: Local CA sample code
+        # response = messaging.send_message(message, verify_peer="../Push-CA-Root.pem")
+        # Case 2: No verification of HTTPS's certificate
         response = messaging.send_message(message)
-        print "response is ", json.dumps(vars(response))
+        # Case 3: use certifi Library
+        # import certifi
+        # response = messaging.send_message(message, verify_peer=certifi.where())
+        print("response is ", json.dumps(vars(response)))
         assert (response.code == '80000000')
     except Exception as e:
-        print repr(e)
+        print(repr(e))
 
 
 def init_app():
-    """init sdk app"""
-    app_id = 'your appId'
-    app_secret = 'your appSecret'
-    push_admin.initialize_app(app_id, app_secret)
+    """init sdk app
+    The appID & app Secret use the Android's application ID and Secret under the same project, next version you can use
+    the web application's own appId & secret!
+    """
+    # TODO
+    app_id_at = "Your android application's app id"
+    app_secret_at = "Your android application's app secret"
+    app_id_push = "Your Web application' app id "
+    push_admin.initialize_app(app_id_at, app_secret_at, app_id_push)
 
 
 def main():

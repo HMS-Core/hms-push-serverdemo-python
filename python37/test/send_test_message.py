@@ -31,12 +31,12 @@ android_notification = messaging.AndroidNotification(
     default_sound=True,
     tag='tagBoom',
     click_action=messaging.AndroidClickAction(
-    action_type=2,
-    url="https://www.huawei.com"),
+        action_type=1,
+        intent="intent://com.huawei.codelabpush/deeplink?#Intent;scheme=pushscheme;launchFlags=0x4000000;i.age=180;S.name=abc;end"),
     body_loc_key='M.String.body',
     body_loc_args=('boy', 'dog'),
     title_loc_key='M.String.title',
-    title_loc_args=["Girl", "Cat"],
+    title_loc_args=["jack", "Cat"],
     channel_id='Your Channel ID',
     notify_summary='some summary',
     multi_lang_key={"title_key": {"en": "value1"}, "body_key": {"en": "value2"}},
@@ -44,7 +44,6 @@ android_notification = messaging.AndroidNotification(
     big_title='Big Boom Title',
     big_body='Big Boom Body',
     auto_clear=86400000,
-    notify_id=486,
     group='Group1',
     importance=messaging.AndroidNotification.PRIORITY_HIGH,
     light_settings=messaging.AndroidLightSettings(color=messaging.AndroidLightSettingsColor(
@@ -75,23 +74,29 @@ def send_push_android_data_message():
     message = messaging.Message(
         notification=notification,
         android=android,
-        condition="'topic1' in topics && ('TopicB' in topics || 'TopicC' in topics)"
+        # TODO
+        token=['Your Token']
     )
 
     try:
-
-        response = messaging.send_message(message)
-        print "response is ", json.dumps(vars(response))
+        # Case 1: Local CA sample code
+        # response = messaging.send_message(message, validate_only=True, verify_peer="../Push-CA-Root.pem")
+        # Case 2: No verification of HTTPS's certificate
+        response = messaging.send_message(message, validate_only=True)
+        # Case 3: use certifi Library
+        # import certifi
+        # response = messaging.send_message(message, validate_only=True, verify_peer=certifi.where())
+        print("response is ", json.dumps(vars(response)))
         assert (response.code == '80000000')
     except Exception as e:
-        print repr(e)
-
+        print(repr(e))
 
 
 def init_app():
     """init sdk app"""
-    app_id = 'your appId'
-    app_secret = 'your appSecret'
+    # TODO
+    app_id = "Your android application's app id"
+    app_secret = "Your android application's app secret"
     push_admin.initialize_app(app_id, app_secret)
 
 

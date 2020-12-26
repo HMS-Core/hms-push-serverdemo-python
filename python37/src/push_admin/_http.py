@@ -17,17 +17,20 @@
 import requests
 
 
-def post(url, req_body, headers=None):
+def post(url, req_body, headers=None, verify_peer=False):
     """ post http request to slb service
         :param url: url path
         :param req_body: http request body
         :param headers: http headers
+        :param verify_peer:  (optional) Either a boolean, in which case it controls whether we verify
+            the server's TLS certificate, or a string, in which case it must be a path
+            to a CA bundle to use. Defaults to ``True``.
         :return:
             success return response
             fali return None
     """
     try:
-        response = requests.post(url, data=req_body, headers=headers, timeout=10, verify=False)
+        response = requests.post(url, data=req_body, headers=headers, timeout=10, verify=verify_peer)
         return response
 
     except Exception as e:
