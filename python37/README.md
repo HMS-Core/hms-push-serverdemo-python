@@ -1,5 +1,5 @@
-## pushkit-python-sample
-
+## HMS PushKit Python Severdemo
+English | [中文](https://github.com/HMS-Core/hms-push-serverdemo-python/blob/master/python37/README_ZH.md)
 
 ## Table of Contents
 
