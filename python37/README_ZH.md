@@ -1,5 +1,5 @@
 ## 华为推送服务服务端Python示例代码
-
+[English](https://github.com/HMS-Core/hms-push-serverdemo-python/tree/master/python37) | 中文
 ## 目录
  * [简介](#简介)
  * [安装](#安装)
