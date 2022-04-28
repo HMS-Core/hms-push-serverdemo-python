@@ -39,8 +39,8 @@ initialize_app方法包括如下参数：
 | -------------  |   ------------------------------------------------------------------------- |
 | appid          |    应用ID，从应用消息中获取 |
 | appsecret      |    应用访问密钥，从应用信息中获取 |
-| token_server   |    华为OAuth 2.0获取token的地址。具体请参考 [基于OAuth 2.0开放鉴权-客户端模式](https://developer.huawei.com/consumer/cn/doc/development/parts-Guides/generating_app_level_access_token) |
-| push_open_url  |    推送服务的访问地址。具体请参考 [推送服务-下行消息](https://developer.huawei.com/consumer/cn/doc/development/HMS-References/push-sendapi).|
+| token_server   |    华为OAuth 2.0获取token的地址。具体请参考[基于OAuth 2.0开放鉴权-客户端模式](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/oauth2-0000001212610981)。|
+| push_open_url  |    推送服务的访问地址。具体请参考 [推送服务-下行消息](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-server-dev-0000001050040110?ha_source=hms1)。|
 
 
 ## 示例代码
