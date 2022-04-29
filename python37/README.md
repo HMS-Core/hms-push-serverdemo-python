@@ -41,13 +41,11 @@ The following table describes parameters of the initialize_app method.
 | -------------  |   ------------------------------------------------------------------------- |
 | appid          |    App ID, which is obtained from app information. |
 | appsecret      |    Secret access key of an app, which is obtained from app information. |
-| token_server   |    URL for the Huawei OAuth 2.0 service to obtain a token, please refer to [Generating an App-Level Access Token](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/oauth2-0000001212610981). |
-| push_open_url  |    URL for accessing HUAWEI Push Kit, please refer to [Sending Messages](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-server-dev-0000001050040110?ha_source=hms1).||
+| token_server   |    URL for the Huawei OAuth 2.0 service to obtain a token, please refer to [Generating an App-Level Access Token](https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides/oauth2-0000001212610981). |
+| push_open_url  |    URL for accessing HUAWEI Push Kit, please refer to [Sending Messages](https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides/android-server-dev-0000001050040110?ha_source=hms1).||
 
 
 ## Sample Code
-Download Python sample code in Downloading Server Sample Code.
-
 
 Python sample code uses the Messaging structure in the push_admin package as the entry. Each method in the Messaging 
 structure calls an API of the HUAWEI Push Kit server.
