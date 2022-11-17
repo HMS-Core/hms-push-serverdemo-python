@@ -42,7 +42,7 @@ class App(object):
         except Exception as e:
             raise ApiCallError('caught exception when send. {0}'.format(e))
 
-    def __init__(self, appid_at, app_secret, appid_push, token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
+    def __init__(self, appid_at, app_secret, appid_push, token_server='https://oauth-login.cloud.huawei.com/oauth2/v3/token',
                  push_open_url='https://push-api.cloud.huawei.com'):
         """class init"""
         self.appid_at = appid_at
