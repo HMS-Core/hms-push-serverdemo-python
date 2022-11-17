@@ -735,12 +735,6 @@ class MessageValidator(object):
                     raise ValueError('AndroidNotification.big_title must be valid string when style is 1')
                 if (big_body is None) and (not isinstance(big_body, str)):
                     raise ValueError('AndroidNotification.big_body must be valid string when style is 1')
-            # # big_picture
-            # if style == 2:
-            #     if (big_picture is None) or (not isinstance(big_picture, str)):
-            #         raise ValueError('AndroidNotification.big_picture must be valid string when style is 2')
-            #     if not big_picture.upper().startswith('HTTPS'):
-            #         raise ValueError('AndroidNotification.big_picture must be valid https url address when type is 2')
         # auto_clear
         cls.check_number(label='AndroidNotification.auto_clear ', value=auto_clear)
         # notify_id
