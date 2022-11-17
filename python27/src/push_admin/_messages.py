@@ -305,8 +305,6 @@ class AndroidNotification(object):
     PRIORITY_LOW = "LOW"
     PRIORITY_DEFAULT = "NORMAL"
     PRIORITY_HIGH = "HIGH"
-
-
     VISIBILITY_UNSPECIFIED = "VISIBILITY_UNSPECIFIED"
     PRIVATE = "PRIVATE"
     PUBLIC = "PUBLIC"
@@ -379,18 +377,14 @@ class AndroidClickAction(object):
         action_type: type of the android.notification (optional).
         intent: intent of the android.notification (optional).
         url: url of the android.notification (optional).
-        action: action definition for push message
-        rich_resource: rich_resource of the android.notification (optional).
+        action: action definition for push message.
     """
-    def __init__(self, action_type=None, intent=None, action=None, url=None, rich_resource=None):
-        MessageValidator.check_click_action(action_type=action_type, intent=intent, action=action, url=url,
-                                            rich_resource=rich_resource)
+    def __init__(self, action_type=None, intent=None, action=None, url=None):
+        MessageValidator.check_click_action(action_type=action_type, intent=intent, action=action, url=url)
         self.action_type = action_type
         self.intent = intent
         self.action = action
         self.url = url
-        self.rich_resource = rich_resource
-
 
 class AndroidBadgeNotification(object):
     """A BadgeNotification that can be included in a message.android.notification.
@@ -779,7 +773,7 @@ class MessageValidator(object):
         cls.check_string(hint="AndroidBadgeNotification.clazz", value=clazz)
 
     @classmethod
-    def check_click_action(cls, action_type, intent, action, url, rich_resource):
+    def check_click_action(cls, action_type, intent, action, url):
         # type must be in [1, 4]
         if (action_type is None) or (action_type not in [1, 2, 3, 4]):
             raise ValueError('ClickAction.type must be in [1, 2, 3, 4]')
@@ -796,13 +790,6 @@ class MessageValidator(object):
                 raise ValueError('ClickAction.url must when ClickAction.type is 2')
             if not url.upper().startswith('HTTPS'):
                 raise ValueError('ClickAction.url must be https prefix when ClickAction.type is 2')
-
-        # rich_resource, if type is 4, rich_resource must
-        if action_type == 4:
-            if not isinstance(rich_resource, str):
-                raise ValueError('ClickAction.rich_resource must when ClickAction.type is 4')
-            if not rich_resource.upper().startswith('HTTPS'):
-                raise ValueError('ClickAction.rich_resource must be https prefix when ClickAction.type is 4')
 
     @classmethod
     def check_light_settings(cls, color, light_on_duration, light_off_duration):
