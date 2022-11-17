@@ -65,7 +65,7 @@ class MessageSerializer(json.JSONEncoder):
            {
               "title":"Big News",
               "body":"This is a Big News!",
-              "image":"https://res.vmallres.com/pimages//common/config/logo/SXppnESYv4K11DBxDFc2_0.png"
+              "image":"https://res.vmallres.com/pimages//common/config/logo/SXppnESYv4K11DBxDFc2.png"
             }
         :param notification:
         :return:
@@ -120,8 +120,8 @@ class MessageSerializer(json.JSONEncoder):
     def encode_android_notification(cls, notification):
         """
            "notification":{
-                "title":"Noti in Noti title",
-                "body":"Noti in Noti body",
+                "title":"test title",
+                "body":"test body",
                 "icon":"https://res.vmallres.com/pimages//common/config/logo/SXppnESYv4K11DBxDFc2.png",
                 "color":"#AACCDD",
                 "sound":"http://att.chinauui.com/day_120606/20120606_7fcf2235b44f1eab0b4dadtAkAGMTBHK.mp3",
@@ -130,7 +130,7 @@ class MessageSerializer(json.JSONEncoder):
                 "importance":"PRIORITY_HIGH",
                 "click_action":{
                     "type":2,
-                    "url":"https://www.baidu.com"
+                    "url":"https://www.huawei.com"
                 },
                 "body_loc_key":"M.String.body",
                 "body_loc_args":[
@@ -145,11 +145,10 @@ class MessageSerializer(json.JSONEncoder):
                 "channel_id":"RingRing",
                 "notify_summary":"Some Summary",
                 "style":2,
-                "big_title":"Big Boom Title",
-                "big_body":"Big Boom Body",
-                "big_picture":"https://developer-portalres-drcn.dbankcdn.com/system/modules/org.opencms.portal.template.core/resources/images/icon_Promotion.png",
-                "notify_id":486,
-                "group":"Espace",
+                "big_title":"Big Title",
+                "big_body":"Big Body",
+                "notify_id":123,
+                "group":"spaceGroup",
                 "badge":{
                     "add_num":99,
                     "set_num":99,
@@ -229,11 +228,6 @@ class MessageSerializer(json.JSONEncoder):
              }
 
              "click_action":{
-                    "type":4,
-                    "rich_resource":"https://www.huawei.com/resource/index.html"
-             }
-
-             "click_action":{
                     "type":1,
                     "intent":"https://www.huawei.com",
                     "action":""
@@ -251,7 +245,6 @@ class MessageSerializer(json.JSONEncoder):
 
         result = {
             "type": click_action.action_type,
-            "rich_resource": click_action.rich_resource,
             "intent": click_action.intent,
             "url": click_action.url,
             "action": click_action.action
@@ -416,13 +409,13 @@ class MessageSerializer(json.JSONEncoder):
                 "actions":[
                     {
                         "action":"",
-                        "icon":"https://developer-portalres-drcn.dbankcdn.com/system/modules/org.opencms.portal.template.core/resources/images/icon_Promotion.png",
+                        "icon":"https://res.vmallres.com/pimages//common/config/logo/SXppnESYv4K11DBxDFc2.png",
                         "title":"string"
                     }
                 ],
                 "badge":"string",
                 "dir":"auto",
-                "icon":"https://developer-portalres-drcn.dbankcdn.com/system/modules/org.opencms.portal.template.core/resources/images/icon_Promotion.png",
+                "icon":"https://res.vmallres.com/pimages//common/config/logo/SXppnESYv4K11DBxDFc2.png",
                 "image":"string",
                 "lang":"string",
                 "renotify":true,
@@ -468,7 +461,7 @@ class MessageSerializer(json.JSONEncoder):
         "actions":[
                     {
                         "action":"",
-                        "icon":"https://developer-portalres-drcn.dbankcdn.com/system/modules/org.opencms.portal.template.core/resources/images/icon_Promotion.png",
+                        "icon":"https://res.vmallres.com/pimages//common/config/logo/SXppnESYv4K11DBxDFc2.png",
                         "title":"string"
                     }
                 ],
@@ -494,7 +487,7 @@ class MessageSerializer(json.JSONEncoder):
     def encode_webpush_config_hms_options(cls, webpush_hms_options):
         """
         "hms_options":{
-                "link":"https://www.baidu.com/"
+                "link":"https://www.huawei.com/"
          }
 
         :param webpush_hms_options: refer to _messages.WebPushHMSOptions
