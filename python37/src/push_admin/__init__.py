@@ -24,7 +24,7 @@ _apps_lock = threading.RLock()
 _DEFAULT_APP_NAME = 'DEFAULT'
 
 
-def initialize_app(appid_at, appsecret_at, appid_push=None, token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
+def initialize_app(appid_at, appsecret_at, appid_push=None, token_server='https://oauth-login.cloud.huawei.com/oauth2/v3/token',
                    push_open_url='https://push-api.cloud.huawei.com'):
     """
         Initializes and returns a new App instance.
