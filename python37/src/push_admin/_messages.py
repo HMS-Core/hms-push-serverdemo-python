@@ -381,17 +381,13 @@ class AndroidClickAction(object):
                 1: to specific activity of application
                 2: specific URL
                 3: to specific application
-        rich_resource: rich_resource of the android.notification (optional).
     """
-    def __init__(self, action_type=None, intent=None, action=None, url=None, rich_resource=None):
-        MessageValidator.check_click_action(action_type=action_type, intent=intent, action=action, url=url,
-                                            rich_resource=rich_resource)
+    def __init__(self, action_type=None, intent=None, action=None, url=None):
+        MessageValidator.check_click_action(action_type=action_type, intent=intent, action=action, url=url)
         self.action_type = action_type
         self.intent = intent
         self.action = action
         self.url = url
-        self.rich_resource = rich_resource
-
 
 class AndroidBadgeNotification(object):
     """A BadgeNotification that can be included in a message.android.notification.
@@ -736,12 +732,6 @@ class MessageValidator(object):
                     raise ValueError('AndroidNotification.big_title must be valid string when style is 1')
                 if (big_body is None) and (not isinstance(big_body, str)):
                     raise ValueError('AndroidNotification.big_body must be valid string when style is 1')
-            # # big_picture
-            # if style == 2:
-            #     if (big_picture is None) or (not isinstance(big_picture, str)):
-            #         raise ValueError('AndroidNotification.big_picture must be valid string when style is 2')
-            #     if not big_picture.upper().startswith('HTTPS'):
-            #         raise ValueError('AndroidNotification.big_picture must be valid https url address when type is 2')
         # auto_clear
         cls.check_number(label='AndroidNotification.auto_clear ', value=auto_clear)
         # notify_id
@@ -786,7 +776,7 @@ class MessageValidator(object):
         cls.check_string(hint="AndroidBadgeNotification.clazz", value=clazz)
 
     @classmethod
-    def check_click_action(cls, action_type, intent, action, url, rich_resource):
+    def check_click_action(cls, action_type, intent, action, url):
         # type must be in [1, 4]
         if (action_type is None) or (action_type not in [1, 2, 3, 4]):
             raise ValueError('ClickAction.type must be in [1, 2, 3, 4]')
@@ -803,13 +793,6 @@ class MessageValidator(object):
                 raise ValueError('ClickAction.url must when ClickAction.type is 2')
             if not url.upper().startswith('HTTPS'):
                 raise ValueError('ClickAction.url must be https prefix when ClickAction.type is 2')
-
-        # rich_resource, if type is 4, rich_resource must
-        if action_type == 4:
-            if not isinstance(rich_resource, str):
-                raise ValueError('ClickAction.rich_resource must when ClickAction.type is 4')
-            if not rich_resource.upper().startswith('HTTPS'):
-                raise ValueError('ClickAction.rich_resource must be https prefix when ClickAction.type is 4')
 
     @classmethod
     def check_light_settings(cls, color, light_on_duration, light_off_duration):
