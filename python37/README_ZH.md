@@ -59,28 +59,28 @@ Messaging包括如下方法:
 
 
 1) 发送Android透传消息
-代码位置: examples/send_data_message.py
+代码位置: [test/send_data_message.py](test/send_data_message.py)
 
 2) 发送Android通知栏消息
-代码位置: examples/send_notify_message.py
+代码位置: [test/send_notify_message.py](test/send_notify_message.py)
 
 3) 基于主题发送消息
-代码位置: examples/send_topic_message.py
+代码位置: [test/send_topic_message.py](test/send_topic_message.py)
 
 4) 基于条件发送消息
-代码位置: examples/send_condition_message.py
+代码位置: [test/send_condition_message.py](test/send_condition_message.py)
 
 5) 向华为快应用发送消息
-代码位置: examples/send_instance_app_message.py
+代码位置: [test/send_instance_app_message.py](test/send_instance_app_message.py)
 
 6) 基于WebPush代理发送消息
-代码位置: examples/send_webpush_message.py
+代码位置: [test/send_webpush_message.py](test/send_webpush_message.py)
 
 7) 基于APNs代理发送消息
-代码位置: examples/send_apns_message.py
+代码位置: [test/send_apns_message.py](test/send_apns_message.py)
 
 8) 发送测试消息
-代码位置: examples/send_test_message.py
+代码位置: [test/send_test_message.py](test/send_test_message.py)
 
 ## 知识库
 | 知识库             |     地址
