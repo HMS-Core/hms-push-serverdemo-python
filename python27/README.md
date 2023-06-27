@@ -62,28 +62,28 @@ The following table describes methods in the Messaging structure.
 
 
 1) Send an Android data message.
-Code location: examples/send_data_message.py
+Code location: [test/send_data_message.py](test/send_data_message.py)
 
 2) Send an Android notification message.
-Code location: examples/send_notify_message.py
+Code location: [test/send_notify_message.py](test/send_notify_message.py)
 
 3) Send a message by topic.
-Code location: examples/send_topic_message.py
+Code location: [test/send_topic_message.py](test/send_topic_message.py)
 
 4) Send a message by conditions.
-Code location: examples/send_condition_message.py
+Code location: [test/send_condition_message.py](test/send_condition_message.py)
 
 5) Send a message to a Huawei quick app.
-Code location: examples/send_instance_app_message.py
+Code location: [test/send_instance_app_message.py](test/send_instance_app_message.py)
 
 6) Send a message through the WebPush agent.
-Code location: examples/send_webpush_message.py
+Code location: [test/send_webpush_message.py](test/send_webpush_message.py)
 
 7) Send a message through the APNs agent.
-Code location: examples/send_apns_message.py
+Code location: [test/send_apns_message.py](test/send_apns_message.py)
 
 8) Send a test message.
-Code location: examples/send_test_message.py
+Code location: [test/send_test_message.py](test/send_test_message.py)
 
 ## Libraries
 | Library             |     Site
