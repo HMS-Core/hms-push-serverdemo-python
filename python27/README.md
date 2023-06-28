@@ -18,8 +18,8 @@ The following table describes packages of Python sample code.
 
 | Package      |    Description |
 | ----------   |    ------------|
-| examples     |    Sample code packages. Each package can run independently.|
-| push_admin   |    Package where APIs of the HUAWEI Push Kit server are encapsulated.|
+| [test](test)     |    Sample code packages. Each package can run independently.|
+| [src/push_admin](src/push_admin)   |    Package where APIs of the HUAWEI Push Kit server are encapsulated.|
 	
 ## Installation
 
