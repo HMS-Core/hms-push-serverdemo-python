@@ -17,8 +17,8 @@ Python示例代码对华为推送服务（HUAWEI Push Kit）服务端接口进�
 
 | 包名     |    说明 |
 | ----------   |    ------------|
-| examples     |    示例代码包，每个包都可以独立运行 |
-| push_admin   |    推送服务的服务端接口封装包 |
+| [test](test)     |    示例代码包，每个包都可以独立运行 |
+| [src/push_admin](src/push_admin)   |    推送服务的服务端接口封装包 |
 	
 ## 安装
 
