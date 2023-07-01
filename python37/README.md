@@ -1,5 +1,5 @@
 ## HMS PushKit Python Severdemo
-English | [中文](https://github.com/HMS-Core/hms-push-serverdemo-python/blob/master/python37/README_ZH.md)
+English | [中文](README_ZH.md)
 
 ## Table of Contents
 
@@ -58,8 +58,6 @@ The following table describes methods in the Messaging structure.
 | subscribe_topic     |     Subscribes to a topic. |
 | unsubscribe_topic   |     Unsubscribes from a topic. |
 | list_topics         |     Queries the list of topics subscribed by a device. |
-| initialize_app      |     Initializes the configuration parameters. |
-
 
 1) Send an Android data message.
 Code location: [test/send_data_message.py](test/send_data_message.py)
