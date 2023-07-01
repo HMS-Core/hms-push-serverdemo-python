@@ -31,7 +31,7 @@ python setup.py install
 ```
 
 ## Supported Environments
-For pushkit-python-sample, We currently support Python 2.7/3.7 and JetBrains PyCharm are recommended.
+For pushkit-python-sample, We currently support Python 3.7 and JetBrains PyCharm are recommended.
 
 
 ## Configuration 
