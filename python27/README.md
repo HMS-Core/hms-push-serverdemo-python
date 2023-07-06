@@ -1,4 +1,5 @@
 # HMS Pushkit Python Severdemo
+English| [中文](README_ZH.md)
 
 ## Table of Contents
  * [Introduction](#introduction)
@@ -58,7 +59,6 @@ The following table describes methods in the Messaging structure.
 | subscribe_topic     |     Subscribes to a topic. |
 | unsubscribe_topic   |     Unsubscribes from a topic. |
 | list_topics         |     Queries the list of topics subscribed by a device. |
-| initialize_app      |     Initializes the configuration parameters. |
 
 
 1) Send an Android data message.
