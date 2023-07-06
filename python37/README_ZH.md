@@ -55,7 +55,6 @@ Messaging包括如下方法:
 | subscribe_topic     |     订阅主题 |
 | unsubscribe_topic   |     退订主题 |
 | list_topics         |     查询设备订阅的主题列表 |
-| initialize_app      |     初始化配置参数 |
 
 
 1) 发送Android透传消息
